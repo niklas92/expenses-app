@@ -22,7 +22,7 @@ const styles = theme => ({
   },
 });
 
-class Dashboard extends React.Component {
+class Overview extends React.Component {
 
   constructor(props){
     super(props);
@@ -70,4 +70,4 @@ class Dashboard extends React.Component {
   }
 }
 
-export default withStyles(styles)(Dashboard);
+export default withStyles(styles)(Overview);

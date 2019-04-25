@@ -6,14 +6,16 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import { mainListItems } from './ui-components/ListItems.js';
-import Dashboard from './ui-components/Dashboard.js';
+import NavigationMenu from './ui-components/NavigationMenu.js';
+import Overview from './ui-components/Overview.js';
+import { Switch, Route } from 'react-router-dom';
+import FileImport from './ui-components/FileImport.js';
+import ExpenseAnalysis from './ui-components/ExpenseAnalysis.js';
 
 
 const drawerWidth = 240;
@@ -148,10 +150,14 @@ class App extends React.Component {
             </IconButton>
           </div>
           <Divider />
-          <List>{mainListItems}</List>
+          <NavigationMenu/>
         </Drawer>
         <main className={classes.content}>
-          <Dashboard></Dashboard>
+          <Switch>
+            <Route exact path='/' component={FileImport}></Route>
+            <Route path='/overview' component={Overview}></Route>
+            <Route path='/analysis' component={ExpenseAnalysis}></Route>
+          </Switch>
         </main>
       </div>
     );
