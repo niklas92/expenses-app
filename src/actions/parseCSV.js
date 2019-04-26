@@ -1,6 +1,7 @@
 import moment from 'moment';
+import classifyExpenses from './classification';
 
-var processData = function (expenses) {
+var prepareData = function (expenses) {
 
     return expenses.map(e => ({
         date: moment(e[0], "DD.MM.YYYY"),
@@ -17,7 +18,6 @@ var processData = function (expenses) {
             }
             return acc;
         }, new Map());
-
 }
 
 var calculateMonthlyExpenses = function (expenses) {
@@ -40,6 +40,18 @@ var calculateAverageExpense = function (dataMap) {
         expenses.push(calculateMonthlyExpenses(val));
     }
     return (expenses.reduce((acc, e) => acc + Number(e), 0) / expenses.length).toFixed(2);
+}
+
+var processData = function(data) {
+    const expenses = prepareData(data);
+
+    console.log(classifyExpenses(expenses));
+
+    return {
+        expenses,
+        monExp: getMonthlyExpenses(expenses),
+        monAvg: calculateAverageExpense(expenses)
+    }
 }
 
 export {processData, calculateAverageExpense, getMonthlyExpenses};

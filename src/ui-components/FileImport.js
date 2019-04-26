@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import CSVReader from 'react-csv-reader';
 
@@ -22,17 +23,24 @@ class FileImport extends React.Component {
   render() {
     const { classes } = this.props;
 
+    const handleForce = data => {
+        this.props.onFileLoaded(data);
+      };
+
     return (
         <main className={classes.content}>
           <div className={classes.appBarSpacer} />
           <CSVReader
-            cssClass="react-csv-input"
             label="Select Expenses CSV"
-            onFileLoaded={this.handleForce}
+            onFileLoaded={handleForce}
           />
         </main>
     );
   }
 }
+
+FileImport.propTypes = {
+    classes: PropTypes.object.isRequired,
+  };
 
 export default withStyles(styles)(FileImport);

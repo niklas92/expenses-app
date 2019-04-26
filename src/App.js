@@ -16,7 +16,7 @@ import Overview from './ui-components/Overview.js';
 import { Switch, Route } from 'react-router-dom';
 import FileImport from './ui-components/FileImport.js';
 import ExpenseAnalysis from './ui-components/ExpenseAnalysis.js';
-
+import { processData } from './actions/parseCSV';
 
 const drawerWidth = 240;
 
@@ -94,6 +94,9 @@ const styles = theme => ({
 class App extends React.Component {
   state = {
     open: true,
+    rawData: [],
+    monthlyExpenses: [], 
+    monthlyAverage: 0
   };
 
   handleDrawerOpen = () => {
@@ -102,6 +105,15 @@ class App extends React.Component {
 
   handleDrawerClose = () => {
     this.setState({ open: false });
+  };
+
+  handleFileLoaded = (data) => {
+    const {monExp, monAvg} = processData(data);
+    this.setState({
+      rawData: data,
+      monthlyExpenses: monExp,
+      monthlyAverage: monAvg
+    });
   };
 
   render() {
@@ -154,8 +166,12 @@ class App extends React.Component {
         </Drawer>
         <main className={classes.content}>
           <Switch>
-            <Route exact path='/' component={FileImport}></Route>
-            <Route path='/overview' component={Overview}></Route>
+            <Route exact path='/' 
+              component={() => (<FileImport onFileLoaded={this.handleFileLoaded} />)}>
+            </Route>
+            <Route path='/overview' 
+              component={() => (<Overview monthlyExpenses={this.state.monthlyExpenses} monthlyAverage={this.state.monthlyAverage} />)}>
+              </Route>
             <Route path='/analysis' component={ExpenseAnalysis}></Route>
           </Switch>
         </main>
