@@ -1,5 +1,4 @@
 import catergoryMap from "./expenseCategories";
-import { switchCase } from "@babel/types";
 
 var classifyExpenses = function(expenses) {
     var classifiedExpenses = new Map();
@@ -13,33 +12,67 @@ var classifyExpenses = function(expenses) {
 
 var monthlyClassification = function(exp) {
     var income = 0;
+    var appartment = 0;
     var groceries = 0;
+    var drugstore = 0;
+    var clothes = 0;
     var other = 0;
-    var unclassified = [];
+    var savings = 0;
+    //var unclassified = [];
 
     exp.forEach(e => {
+        savings += e.amount;
         switch (classifyEntry(e)) {
             case "INCOME":
                 income += e.amount;
                 break;
+            case "APPARTMENT":
+                appartment += + e.amount;
+                break;
             case "GROCERIES":
                 groceries += + e.amount;
                 break;
+            case "DRUGSTORE":
+                drugstore += + e.amount;
+                break;
+            case "CLOTHES":
+                clothes += + e.amount;
+                break;
             default:
                 other += e.amount;
-                unclassified.push(e);
+                //unclassified.push(e);
                 break;
         }
     });
 
-    var total = income + groceries + other;
+
 
     return {
+        expenseGroups: [
+            {
+                name: "Appartment",
+                value: appartment.toFixed(2) * (-1)
+            },
+            {
+                name: "Groceries",
+                value: groceries.toFixed(2) * (-1)
+            },
+            {
+                name: "Drugstore",
+                value: drugstore.toFixed(2) * (-1)
+            },
+            {
+                name: "Clothes",
+                value: clothes.toFixed(2) * (-1)
+            },
+            {
+                name: "Other",
+                value: other.toFixed(2) * (-1)
+            }
+        ],
         income: income.toFixed(2),
-        groceries: groceries.toFixed(2),
-        other: other.toFixed(2),
-        total: total.toFixed(2),
-        unclassified
+        savings: savings.toFixed(2),
+        //unclassified
     }
 } 
 

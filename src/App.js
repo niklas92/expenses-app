@@ -95,6 +95,7 @@ class App extends React.Component {
   state = {
     open: true,
     rawData: [],
+    classifiedExpenses: new Map(),
     monthlyExpenses: [], 
     monthlyAverage: 0
   };
@@ -108,9 +109,12 @@ class App extends React.Component {
   };
 
   handleFileLoaded = (data) => {
-    const {monExp, monAvg} = processData(data);
+    const {classExp, monExp, monAvg} = processData(data);
+    console.log(classExp);
+
     this.setState({
       rawData: data,
+      classifiedExpenses: classExp,
       monthlyExpenses: monExp,
       monthlyAverage: monAvg
     });
@@ -167,12 +171,13 @@ class App extends React.Component {
         <main className={classes.content}>
           <Switch>
             <Route exact path='/' 
-              component={() => (<FileImport onFileLoaded={this.handleFileLoaded} />)}>
+              component={() => (<FileImport onFileLoaded={this.handleFileLoaded} classExp={this.state.classifiedExpenses}/>)}>
             </Route>
             <Route path='/overview' 
               component={() => (<Overview monthlyExpenses={this.state.monthlyExpenses} monthlyAverage={this.state.monthlyAverage} />)}>
               </Route>
-            <Route path='/analysis' component={ExpenseAnalysis}></Route>
+            <Route path='/analysis' component={() => (<ExpenseAnalysis classExp={this.state.classifiedExpenses}/>)}>
+            </Route>
           </Switch>
         </main>
       </div>

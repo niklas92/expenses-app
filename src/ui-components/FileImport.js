@@ -25,7 +25,7 @@ class FileImport extends React.Component {
 
     const handleForce = data => {
         this.props.onFileLoaded(data);
-      };
+    }
 
     return (
         <main className={classes.content}>

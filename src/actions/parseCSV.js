@@ -45,10 +45,11 @@ var calculateAverageExpense = function (dataMap) {
 var processData = function(data) {
     const expenses = prepareData(data);
 
-    console.log(classifyExpenses(expenses));
+    const classExp = classifyExpenses(expenses);
 
     return {
         expenses,
+        classExp,
         monExp: getMonthlyExpenses(expenses),
         monAvg: calculateAverageExpense(expenses)
     }
