@@ -1,7 +1,8 @@
 import React from 'react';
 import ResponsiveContainer from 'recharts/lib/component/ResponsiveContainer';
-import LineChart from 'recharts/lib/chart/LineChart';
-import Line from 'recharts/lib/cartesian/Line';
+import BarChart from 'recharts/lib/chart/BarChart';
+import Bar from 'recharts/lib/cartesian/Bar';
+import ReferenceLine from 'recharts/lib/cartesian/ReferenceLine';
 import XAxis from 'recharts/lib/cartesian/XAxis';
 import YAxis from 'recharts/lib/cartesian/YAxis';
 import CartesianGrid from 'recharts/lib/cartesian/CartesianGrid';
@@ -14,21 +15,19 @@ function SimpleLineChart(props) {
   const data = tableData.map(e => ({
     month: e.month,
     amount: e.amount,
-    average: monthlyAverage
   }))
 
   return (
-    // 99% per https://github.com/recharts/recharts/issues/172
-    <ResponsiveContainer width="99%" height={320}>
-      <LineChart data={data}>
+    <ResponsiveContainer width="100%" height={320}>
+      <BarChart data={data}>
         <XAxis dataKey="month" />
         <YAxis />
         <CartesianGrid vertical={false} strokeDasharray="3 3" />
         <Tooltip />
         <Legend />
-        <Line type="monotone" dataKey="amount" stroke="#82ca9d" />
-        <Line type="monotone" dataKey="average" stroke="#8884d8" activeDot={{ r: 8 }} />
-      </LineChart>
+        <ReferenceLine y={monthlyAverage} label="Average" stroke="red" />
+        <Bar dataKey="amount" fill="#82ca9d" />
+      </BarChart>
     </ResponsiveContainer>
   );
 }
