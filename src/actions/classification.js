@@ -12,64 +12,40 @@ var classifyExpenses = function(expenses) {
 
 var monthlyClassification = function(exp) {
     var income = 0;
-    var appartment = 0;
-    var groceries = 0;
-    var drugstore = 0;
-    var clothes = 0;
-    var other = 0;
     var savings = 0;
     //var unclassified = [];
+    var expMap = new Map();
+    expMap.set("GROCERIES", 0);
+    expMap.set("DRUGSTORE", 0);
+    expMap.set("APPARTMENT", 0);
+    expMap.set("CLOTHES", 0);
+    expMap.set("PUBLIC_TRANSPORT", 0);
+    expMap.set("TRAVEL", 0);
+    expMap.set("BOOKS", 0);
+    expMap.set("INSURANCE", 0);
+    expMap.set("ATM", 0);
+    expMap.set("BAR_CAFE", 0);
+    expMap.set("OTHER", 0);
 
     exp.forEach(e => {
         savings += e.amount;
-        switch (classifyEntry(e)) {
-            case "INCOME":
-                income += e.amount;
-                break;
-            case "APPARTMENT":
-                appartment += + e.amount;
-                break;
-            case "GROCERIES":
-                groceries += + e.amount;
-                break;
-            case "DRUGSTORE":
-                drugstore += + e.amount;
-                break;
-            case "CLOTHES":
-                clothes += + e.amount;
-                break;
-            default:
-                other += e.amount;
-                //unclassified.push(e);
-                break;
+        var key = classifyEntry(e);
+        if(key === "INCOME") {
+            income += e.amount;
+        } else {
+            var newVal = expMap.get(key) + e.amount;
+            expMap.set(key, newVal);
         }
     });
 
+    var expArr = [];
+    for (const [key, val] of expMap.entries()) {
+        expArr.push({category: key, amount: val.toFixed(2) * (-1)});
+    }
 
 
     return {
-        expenseGroups: [
-            {
-                name: "Appartment",
-                value: appartment.toFixed(2) * (-1)
-            },
-            {
-                name: "Groceries",
-                value: groceries.toFixed(2) * (-1)
-            },
-            {
-                name: "Drugstore",
-                value: drugstore.toFixed(2) * (-1)
-            },
-            {
-                name: "Clothes",
-                value: clothes.toFixed(2) * (-1)
-            },
-            {
-                name: "Other",
-                value: other.toFixed(2) * (-1)
-            }
-        ],
+        expenseGroups: expArr,
         income: income.toFixed(2),
         savings: savings.toFixed(2),
         //unclassified

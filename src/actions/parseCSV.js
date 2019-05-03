@@ -19,16 +19,11 @@ var prepareData = function (expenses) {
             return acc;
         }, new Map());
 }
-
-var calculateMonthlyExpenses = function (expenses) {
-    let monthlyExpense = expenses.reduce((acc, e) => acc + e.amount, 0).toFixed(2);
-    return monthlyExpense;
-  }
   
 var getMonthlyExpenses = function (dataMap) {
     var expenses = [];
     for (const [key, val] of dataMap.entries()) {
-        expenses.push({month: key, amount: calculateMonthlyExpenses(val)});
+        expenses.push({month: key, amount: val.savings});
     }
     return expenses;
 }
@@ -37,7 +32,7 @@ var calculateAverageExpense = function (dataMap) {
     var expenses = [];
     // eslint-disable-next-line
     for (const [key, val] of dataMap.entries()) {
-        expenses.push(calculateMonthlyExpenses(val));
+        expenses.push(val.savings);
     }
     return (expenses.reduce((acc, e) => acc + Number(e), 0) / expenses.length).toFixed(2);
 }
@@ -50,8 +45,8 @@ var processData = function(data) {
     return {
         expenses,
         classExp,
-        monExp: getMonthlyExpenses(expenses),
-        monAvg: calculateAverageExpense(expenses)
+        monExp: getMonthlyExpenses(classExp),
+        monAvg: calculateAverageExpense(classExp)
     }
 }
 

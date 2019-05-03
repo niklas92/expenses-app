@@ -50,16 +50,16 @@ class ExpenseAnalysis extends React.Component {
     }
   }
 
-  renderCustomizedLabel = ({index}) => 
-    this.props.classExp.get(this.state.selectedMonth).expenseGroups[index].value > 0 
-      ? this.props.classExp.get(this.state.selectedMonth).expenseGroups[index].name 
-      : undefined;
+  renderCustomizedLabel = ({index}) => this.pieData()[index].category;
 
   handleMonthChange = event => {
     this.setState({ selectedMonth: event.target.value });
   };
 
-  pieData = () => this.props.classExp.get(this.state.selectedMonth) ? this.props.classExp.get(this.state.selectedMonth).expenseGroups : [];
+  pieData = () => {
+    const month = this.props.classExp.get(this.state.selectedMonth);
+    return month ? month.expenseGroups.filter(e => e.amount > 0) : [];
+  }
 
   createSelectMenu = () => {
     var menu = []
@@ -104,7 +104,7 @@ class ExpenseAnalysis extends React.Component {
 
               <ResponsiveContainer width="100%" height={350}>
                 <PieChart margin={{ top: 20, right: 30, left: 0, bottom: 0 }}>
-                  <Pie data={this.pieData()} dataKey="value" nameKey="name" minAngle={0} cx="50%" cy="50%" fill="#82ca9d" label={this.renderCustomizedLabel}>
+                  <Pie data={this.pieData()} dataKey="amount" nameKey="category" minAngle={0} cx="50%" cy="50%" fill="#82ca9d" label={this.renderCustomizedLabel}>
                   {
                   this.pieData().map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)
                   }
