@@ -12,10 +12,10 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NavigationMenu from './ui-components/NavigationMenu.js';
-import Overview from './ui-components/Overview.js';
+import Overview from './ui-components/overview/Overview.js';
 import { Switch, Route } from 'react-router-dom';
 import FileImport from './ui-components/FileImport.js';
-import ExpenseAnalysis from './ui-components/ExpenseAnalysis.js';
+import ExpenseAnalysis from './ui-components/analysis/ExpenseAnalysis.js';
 import { processData } from './actions/parseCSV';
 
 const drawerWidth = 240;

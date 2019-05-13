@@ -1,18 +1,17 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import PieChart from 'recharts/lib/chart/PieChart';
-import Pie from 'recharts/lib/polar/Pie';
-import Cell from 'recharts/lib/component/Cell';
 import Typography from '@material-ui/core/Typography';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem'
-import ResponsiveContainer from 'recharts/lib/component/ResponsiveContainer';
-
-const COLORS = ['#ffc107', '#009688', '#3f51b5', '#f44336', '#2196f3', '#cddc39', '#ff5722', '#00bcd4', '#673ab7', '#03a9f4'];
+import CategoriesPieChart from './CategoriesPieChart';
+import CategoriesBarChart from './CategoriesBarChart';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
+import FilledInput from '@material-ui/core/FilledInput';
 
 const styles = theme => ({ 
   appBarSpacer: theme.mixins.toolbar,
@@ -32,7 +31,8 @@ const styles = theme => ({
     justifyContent: 'space-between'
   },
   formControl: {
-    width: '100px',
+    margin: theme.spacing.unit,
+    minWidth: 120,
   }
 });
 
@@ -46,19 +46,30 @@ class ExpenseAnalysis extends React.Component {
         : "";
 
     this.state = {
-      selectedMonth: currentSelection
+      selectedMonth: currentSelection,
+      isPieChart: true,
+      labelWidth: 0
     }
   }
 
-  renderCustomizedLabel = ({index}) => this.pieData()[index].category;
+  componentDidMount() {
+    this.setState({
+      labelWidth: ReactDOM.findDOMNode(this.InputLabelRef).offsetWidth,
+    });
+  }
+
 
   handleMonthChange = event => {
     this.setState({ selectedMonth: event.target.value });
   };
 
-  pieData = () => {
+  handleChartTypeChange = event => {
+    this.setState({ isPieChart: event.target.value });
+  };
+
+  chartData = () => {
     const month = this.props.classExp.get(this.state.selectedMonth);
-    return month ? month.expenseGroups.filter(e => e.amount > 0) : [];
+    return month ? month.expenseGroups : [];
   }
 
   createSelectMenu = () => {
@@ -86,15 +97,31 @@ class ExpenseAnalysis extends React.Component {
                   Expenses per Category
                 </Typography>
                 <form className={classes.root} autoComplete="off">
-                  <FormControl className={classes.formControl}>
-                    <InputLabel htmlFor="month">Month</InputLabel>
+                  <FormControl variant="outlined" className={classes.formControl}>
+                    <InputLabel 
+                      ref={ref => {
+                        this.InputLabelRef = ref;
+                      }}
+                      htmlFor="type">Type</InputLabel>
+                    <Select
+                      value={this.state.isPieChart}
+                      onChange={this.handleChartTypeChange}
+                      input={<OutlinedInput labelWidth={this.state.labelWidth} name="type" id="type" />}
+                    >
+                      <MenuItem key='pie' value={true}>Pie Chart</MenuItem>
+                      <MenuItem key='bar' value={false}>Bar Chart</MenuItem>
+                    </Select>
+                  </FormControl>
+                  <FormControl variant="outlined" className={classes.formControl}>
+                    <InputLabel 
+                      ref={ref => {
+                        this.InputLabelRef = ref;
+                      }}
+                      htmlFor="month">Month</InputLabel>
                     <Select
                       value={this.state.selectedMonth}
                       onChange={this.handleMonthChange}
-                      inputProps={{
-                        name: 'month',
-                        id: 'month',
-                      }}
+                      input={<OutlinedInput labelWidth={this.state.labelWidth} name="month" id="month" />}
                     >
                     {this.createSelectMenu()}
                     </Select>
@@ -102,16 +129,9 @@ class ExpenseAnalysis extends React.Component {
                 </form>
               </div>      
 
-              <ResponsiveContainer width="100%" height={350}>
-                <PieChart margin={{ top: 20, right: 30, left: 0, bottom: 0 }}>
-                  <Pie data={this.pieData()} dataKey="amount" nameKey="category" minAngle={0} cx="50%" cy="50%" fill="#82ca9d" label={this.renderCustomizedLabel}>
-                  {
-                  this.pieData().map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)
-                  }
-                  </Pie>
-                </PieChart>
-              </ResponsiveContainer>
-
+              {this.state.isPieChart
+                ? <CategoriesPieChart chartData={this.chartData()}/>
+                : <CategoriesBarChart chartData={this.chartData()}/>}
             </CardContent>
           </Card>
 
