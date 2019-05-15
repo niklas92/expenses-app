@@ -9,13 +9,13 @@ import CartesianGrid from 'recharts/lib/cartesian/CartesianGrid';
 import Tooltip from 'recharts/lib/component/Tooltip';
 import Legend from 'recharts/lib/component/Legend';
 
-function SimpleLineChart(props) {
+function OverviewBarChart(props) {
   const { tableData, monthlyAverage } = props;
 
   const data = tableData.map(e => ({
     month: e.month,
     amount: e.amount,
-  }))
+  })).reverse();
 
   return (
     <ResponsiveContainer width="100%" height={320}>
@@ -32,4 +32,4 @@ function SimpleLineChart(props) {
   );
 }
 
-export default SimpleLineChart;
+export default OverviewBarChart;

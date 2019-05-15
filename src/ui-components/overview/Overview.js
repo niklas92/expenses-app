@@ -3,8 +3,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import SimpleLineChart from './SimpleLineChart.js';
-import SimpleTable from './SimpleTable.js';
+import OverviewBarChart from './OverviewBarChart.js';
 
 const styles = theme => ({ 
   appBarSpacer: theme.mixins.toolbar,
@@ -38,17 +37,10 @@ class Overview extends React.Component {
               Monthly Savings
             </Typography>
             <div className={classes.chartContainer}>
-              <SimpleLineChart tableData={this.props.monthlyExpenses} monthlyAverage={this.props.monthlyAverage} />
+              <OverviewBarChart tableData={this.props.monthlyExpenses} monthlyAverage={this.props.monthlyAverage} />
             </div>
             </CardContent>
           </Card>
-          
-          <Typography variant="h4" gutterBottom component="h2">
-            Monthly Savings
-          </Typography>
-          <div className={classes.tableContainer}>
-            <SimpleTable tableData={this.props.monthlyExpenses} monthlyAverage={this.props.monthlyAverage}/>
-          </div>
         </main>
     );
   }

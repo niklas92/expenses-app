@@ -8,9 +8,11 @@ import CartesianGrid from 'recharts/lib/cartesian/CartesianGrid';
 import Tooltip from 'recharts/lib/component/Tooltip';
 import Legend from 'recharts/lib/component/Legend';
 
-function SimpleLineChart(props) {
+function CategoriesBarChart(props) {
 
-const barData = props.chartData
+  const barData = props.chartData.sort((a,b) => {
+    return a.amount > b.amount ? -1 : 1;
+  })
     
   return (
     <ResponsiveContainer width="100%" height={320}>
@@ -26,4 +28,4 @@ const barData = props.chartData
   );
 }
 
-export default SimpleLineChart;
+export default CategoriesBarChart;
