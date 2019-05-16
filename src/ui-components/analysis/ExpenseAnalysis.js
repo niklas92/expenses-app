@@ -48,13 +48,17 @@ class ExpenseAnalysis extends React.Component {
     this.state = {
       selectedMonth: currentSelection,
       isPieChart: true,
-      labelWidth: 0
+      labelWidthType: 0,
+      labelWidthMonth: 0,
+      labelWidthCategory: 0
     }
   }
 
   componentDidMount() {
     this.setState({
-      labelWidth: ReactDOM.findDOMNode(this.InputLabelRef).offsetWidth,
+      labelWidthType: ReactDOM.findDOMNode(this.InputLabelRefType).offsetWidth,
+      labelWidthMonth: ReactDOM.findDOMNode(this.InputLabelRefMonth).offsetWidth,
+      labelWidthCategory: ReactDOM.findDOMNode(this.InputLabelRefCategory).offsetWidth,
     });
   }
 
@@ -85,28 +89,27 @@ class ExpenseAnalysis extends React.Component {
     const { classes } = this.props;
 
     return (
-        <main className={classes.mainContent}>
-          <div className={classes.appBarSpacer} />
+        <div>
           <Typography color="textSecondary" variant="h4" gutterBottom component="h2">Analysis</Typography>
           
-          <Card>
+          <Card className={classes.cardContainer}>
             <CardContent className={classes.cardContent}>
 
               <div className={classes.cardHeader}>
                 <Typography color="textSecondary" component="h5" variant="h5">
-                  Expenses per Category
+                  Expenses per Month
                 </Typography>
                 <form className={classes.root} autoComplete="off">
                   <FormControl variant="outlined" className={classes.formControl}>
                     <InputLabel 
                       ref={ref => {
-                        this.InputLabelRef = ref;
+                        this.InputLabelRefType = ref;
                       }}
                       htmlFor="type">Type</InputLabel>
                     <Select
                       value={this.state.isPieChart}
                       onChange={this.handleChartTypeChange}
-                      input={<OutlinedInput labelWidth={this.state.labelWidth} name="type" id="type" />}
+                      input={<OutlinedInput labelWidth={this.state.labelWidthType} name="type" id="type" />}
                     >
                       <MenuItem key='pie' value={true}>Pie Chart</MenuItem>
                       <MenuItem key='bar' value={false}>Bar Chart</MenuItem>
@@ -115,13 +118,13 @@ class ExpenseAnalysis extends React.Component {
                   <FormControl variant="outlined" className={classes.formControl}>
                     <InputLabel 
                       ref={ref => {
-                        this.InputLabelRef = ref;
+                        this.InputLabelRefMonth = ref;
                       }}
                       htmlFor="month">Month</InputLabel>
                     <Select
                       value={this.state.selectedMonth}
                       onChange={this.handleMonthChange}
-                      input={<OutlinedInput labelWidth={this.state.labelWidth} name="month" id="month" />}
+                      input={<OutlinedInput labelWidth={this.state.labelWidthMonth} name="month" id="month" />}
                     >
                     {this.createSelectMenu()}
                     </Select>
@@ -135,7 +138,53 @@ class ExpenseAnalysis extends React.Component {
             </CardContent>
           </Card>
 
-        </main>
+          <div className={classes.cardDivider} />
+
+          <Card className={classes.cardContainer}>
+            <CardContent className={classes.cardContent}>
+
+              <div className={classes.cardHeader}>
+                <Typography color="textSecondary" component="h5" variant="h5">
+                  Expenses per Category
+                </Typography>
+                <form className={classes.root} autoComplete="off">
+                  <FormControl variant="outlined" className={classes.formControl}>
+                    <InputLabel 
+                      ref={ref => {
+                        this.InputLabelRefCategory = ref;
+                      }}
+                      htmlFor="category">Category</InputLabel>
+                    <Select
+                      value={this.state.isPieChart}
+                      onChange={this.handleChartTypeChange}
+                      input={<OutlinedInput labelWidth={this.state.labelWidthCategory} name="category" id="category" />}
+                    >
+                      <MenuItem key='pie' value={true}>Income</MenuItem>
+                      <MenuItem key='bar' value={false}>Other</MenuItem>
+                    </Select>
+                  </FormControl>
+                  <FormControl variant="outlined" className={classes.formControl}>
+                    <InputLabel 
+                      ref={ref => {
+                        this.InputLabelRefMonth = ref;
+                      }}
+                      htmlFor="month">Month</InputLabel>
+                    <Select
+                      value={this.state.selectedMonth}
+                      onChange={this.handleMonthChange}
+                      input={<OutlinedInput labelWidth={this.state.labelWidthMonth} name="month" id="month" />}
+                    >
+                    {this.createSelectMenu()}
+                    </Select>
+                  </FormControl>
+                </form>
+              </div>      
+
+              <CategoriesTable tableData={this.chartData()}/>
+            </CardContent>
+          </Card>
+
+        </div>
     );
   }
 }
