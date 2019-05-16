@@ -3,14 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import CSVReader from 'react-csv-reader';
 
-const styles = theme => ({ 
-  appBarSpacer: theme.mixins.toolbar,
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing.unit * 3,
-    height: '100vh',
-    overflow: 'auto',
-  },
+const styles = theme => ({
 });
 
 class FileImport extends React.Component {
@@ -28,13 +21,12 @@ class FileImport extends React.Component {
     }
 
     return (
-        <main className={classes.content}>
-          <div className={classes.appBarSpacer} />
+        <div>
           <CSVReader
             label="Select Expenses CSV"
             onFileLoaded={handleForce}
           />
-        </main>
+        </div>
     );
   }
 }

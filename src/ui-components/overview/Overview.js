@@ -6,13 +6,6 @@ import Typography from '@material-ui/core/Typography';
 import OverviewBarChart from './OverviewBarChart.js';
 
 const styles = theme => ({ 
-  appBarSpacer: theme.mixins.toolbar,
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing.unit * 3,
-    height: '100vh',
-    overflow: 'auto',
-  },
   chartContainer: {
     paddingTop: '16px',
     marginLeft: '-22px'
@@ -27,11 +20,10 @@ class Overview extends React.Component {
     const { classes } = this.props;
 
     return (
-        <main className={classes.content}>
-          <div className={classes.appBarSpacer} />
+        <div>
           <Typography color="textSecondary" variant="h4" gutterBottom component="h2">Overview</Typography>
           
-          <Card className={classes.card}>
+          <Card>
             <CardContent>
             <Typography color="textSecondary" component="h5" variant="h5">
               Monthly Savings
@@ -41,7 +33,7 @@ class Overview extends React.Component {
             </div>
             </CardContent>
           </Card>
-        </main>
+        </div>
     );
   }
 }

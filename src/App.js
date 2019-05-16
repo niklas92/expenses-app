@@ -82,8 +82,12 @@ const styles = theme => ({
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing.unit * 3,
-    height: '100vh',
+    paddingTop: theme.spacing.unit * 3,
+    paddingBottom: theme.spacing.unit * 3,
+    paddingLeft: theme.spacing.unit * 6,
+    paddingRight: theme.spacing.unit * 6,
+    height: `calc(100vh - 64px)`,
+    marginTop: '64px',
     overflow: 'auto',
   },
   h5: {

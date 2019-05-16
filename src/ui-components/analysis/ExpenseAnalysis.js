@@ -10,16 +10,13 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem'
 import CategoriesPieChart from './CategoriesPieChart';
 import CategoriesBarChart from './CategoriesBarChart';
+import CategoriesTable from './CategoriesTable';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
-import FilledInput from '@material-ui/core/FilledInput';
 
 const styles = theme => ({ 
-  appBarSpacer: theme.mixins.toolbar,
-  mainContent: {
-    flexGrow: 1,
-    padding: theme.spacing.unit * 3,
-    height: '100vh',
-    overflow: 'auto',
+
+  cardContainer: {
+    marginBottom: '18px;'
   },
   cardContent: {
     display: 'flex',
@@ -29,6 +26,9 @@ const styles = theme => ({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between'
+  },
+  cardDivider: {
+    minHeight: '30px'
   },
   formControl: {
     margin: theme.spacing.unit,
