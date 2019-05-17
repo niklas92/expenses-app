@@ -6,15 +6,18 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
 
 const styles = {
   root: {
     width: '100%',
     overflowX: 'auto',
   },
-  table: {
-    minWidth: 700,
+  tableContainer: {
+    borderStyle: 'solid',
+    borderWidth: '1px',
+    borderRadius: '4px',
+    borderColor: 'rgba(0, 0, 0, 0.23)',
+    margin: '8px',
   },
   averageRow: {
     backgroundColor: '#e0e0e0',
@@ -25,8 +28,8 @@ function CategoriesTable(props) {
   const { classes, tableData } = props;
 
   return (
-    <Paper>
-      <Table className={classes.table}>
+    <div className={classes.tableContainer}>
+      <Table>
         <TableHead>
           <TableRow>
             <TableCell>Category</TableCell>
@@ -50,7 +53,7 @@ function CategoriesTable(props) {
           </TableRow>
         </TableBody>
       </Table>
-    </Paper>
+    </div>
   );
 }
 
