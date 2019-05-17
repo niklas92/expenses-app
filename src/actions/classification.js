@@ -13,19 +13,18 @@ var classifyExpenses = function(expenses) {
 var monthlyClassification = function(exp) {
     var income = 0;
     var savings = 0;
-    //var unclassified = [];
     var expMap = new Map();
-    expMap.set("GROCERIES", 0);
-    expMap.set("DRUGSTORE", 0);
-    expMap.set("APPARTMENT", 0);
-    expMap.set("CLOTHES", 0);
-    expMap.set("PUBLIC_TRANSPORT", 0);
-    expMap.set("TRAVEL", 0);
-    expMap.set("BOOKS", 0);
-    expMap.set("INSURANCE", 0);
-    expMap.set("ATM", 0);
-    expMap.set("BAR_CAFE", 0);
-    expMap.set("OTHER", 0);
+    expMap.set("GROCERIES", {amount: 0, entries: []});
+    expMap.set("DRUGSTORE", {amount: 0, entries: []});
+    expMap.set("APPARTMENT", {amount: 0, entries: []});
+    expMap.set("CLOTHES", {amount: 0, entries: []});
+    expMap.set("PUBLIC_TRANSPORT", {amount: 0, entries: []});
+    expMap.set("TRAVEL", {amount: 0, entries: []});
+    expMap.set("BOOKS", {amount: 0, entries: []});
+    expMap.set("INSURANCE", {amount: 0, entries: []});
+    expMap.set("ATM", {amount: 0, entries: []});
+    expMap.set("BAR_CAFE", {amount: 0, entries: []});
+    expMap.set("OTHER", {amount: 0, entries: []});
 
     exp.forEach(e => {
         savings += e.amount;
@@ -33,22 +32,29 @@ var monthlyClassification = function(exp) {
         if(key === "INCOME") {
             income += e.amount;
         } else {
-            var newVal = expMap.get(key) + e.amount;
+            var oldVal = expMap.get(key);
+            var newVal = {
+                amount: oldVal.amount + e.amount,
+                entries: oldVal.entries.concat(e)
+            };
             expMap.set(key, newVal);
         }
     });
 
     var expArr = [];
     for (const [key, val] of expMap.entries()) {
-        expArr.push({category: key, amount: val.toFixed(2) * (-1)});
+        expArr.push({
+            category: key, 
+            amount: val.amount.toFixed(2) * (-1),
+            entries: val.entries
+        });
     }
 
 
     return {
         expenseGroups: expArr,
         income: income.toFixed(2),
-        savings: savings.toFixed(2),
-        //unclassified
+        savings: savings.toFixed(2)
     }
 } 
 

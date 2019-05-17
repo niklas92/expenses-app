@@ -47,6 +47,7 @@ class ExpenseAnalysis extends React.Component {
 
     this.state = {
       selectedMonth: currentSelection,
+      selectedCategory: 'OTHER',
       isPieChart: true,
       labelWidthType: 0,
       labelWidthMonth: 0,
@@ -74,6 +75,14 @@ class ExpenseAnalysis extends React.Component {
   chartData = () => {
     const month = this.props.classExp.get(this.state.selectedMonth);
     return month ? month.expenseGroups : [];
+  }
+
+  tableData = () => {
+    const month = this.props.classExp.get(this.state.selectedMonth);
+    const category = month ? month.expenseGroups.find((element) => {
+      return element.category === this.state.selectedCategory;
+    }) : undefined;
+    return category ? category.entries : [];
   }
 
   createSelectMenu = () => {
@@ -180,7 +189,7 @@ class ExpenseAnalysis extends React.Component {
                 </form>
               </div>      
 
-              <CategoriesTable tableData={this.chartData()}/>
+              <CategoriesTable tableData={this.tableData()}/>
             </CardContent>
           </Card>
 
