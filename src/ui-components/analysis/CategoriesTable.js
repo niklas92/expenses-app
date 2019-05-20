@@ -42,18 +42,18 @@ function CategoriesTable(props) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {tableEntries.map(n => (
-            <TableRow key={n.name + n.amount}>
+          {tableEntries.map((entry, i) => (
+            <TableRow key={i}>
               <TableCell component="th" scope="row">
-                {n.date.format("DD.MM.YYYY")}
+                {entry.date.format("DD.MM.YYYY")}
               </TableCell>
               <TableCell component="th" scope="row">
-                {n.name}
+                {entry.name}
               </TableCell>
               <TableCell component="th" scope="row">
-                {n.reference}
+                {entry.reference}
               </TableCell>
-              <TableCell align="right">{n.amount} €</TableCell>
+              <TableCell align="right">{entry.amount} €</TableCell>
             </TableRow>
           ))}
           <TableRow className={classes.averageRow} key="average">
