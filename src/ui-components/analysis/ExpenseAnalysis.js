@@ -72,6 +72,10 @@ class ExpenseAnalysis extends React.Component {
     this.setState({ isPieChart: event.target.value });
   };
 
+  handleCategoryChange = event => {
+    this.setState({ selectedCategory: event.target.value });
+  };
+
   chartData = () => {
     const month = this.props.classExp.get(this.state.selectedMonth);
     return month ? month.expenseGroups : [];
@@ -79,17 +83,27 @@ class ExpenseAnalysis extends React.Component {
 
   tableData = () => {
     const month = this.props.classExp.get(this.state.selectedMonth);
-    const category = month ? month.expenseGroups.find((element) => {
+    return month ? month.expenseGroups.find((element) => {
       return element.category === this.state.selectedCategory;
     }) : undefined;
-    return category ? category.entries : [];
   }
 
-  createSelectMenu = () => {
-    var menu = []
+  createSelectMenuMonths = () => {
+    const menu = []
 
     for (const [k] of this.props.classExp.entries()) {
       menu.push(<MenuItem key={k} value={k}>{k}</MenuItem>);
+    }
+    return menu;
+  }
+
+  createSelectMenuCategories = () => {
+    const menu = []
+    const categoryArray = this.props.classExp.get("3.2019") ? this.props.classExp.get("3.2019").expenseGroups : [];
+
+    for (const i in categoryArray) {
+      const cat = categoryArray[i].category
+      menu.push(<MenuItem key={cat} value={cat}>{cat}</MenuItem>);
     }
     return menu;
   }
@@ -135,7 +149,7 @@ class ExpenseAnalysis extends React.Component {
                       onChange={this.handleMonthChange}
                       input={<OutlinedInput labelWidth={this.state.labelWidthMonth} name="month" id="month" />}
                     >
-                    {this.createSelectMenu()}
+                    {this.createSelectMenuMonths()}
                     </Select>
                   </FormControl>
                 </form>
@@ -164,12 +178,11 @@ class ExpenseAnalysis extends React.Component {
                       }}
                       htmlFor="category">Category</InputLabel>
                     <Select
-                      value={this.state.isPieChart}
-                      onChange={this.handleChartTypeChange}
+                      value={this.state.selectedCategory}
+                      onChange={this.handleCategoryChange}
                       input={<OutlinedInput labelWidth={this.state.labelWidthCategory} name="category" id="category" />}
                     >
-                      <MenuItem key='pie' value={true}>Income</MenuItem>
-                      <MenuItem key='bar' value={false}>Other</MenuItem>
+                      {this.createSelectMenuCategories()}
                     </Select>
                   </FormControl>
                   <FormControl variant="outlined" className={classes.formControl}>
@@ -183,7 +196,7 @@ class ExpenseAnalysis extends React.Component {
                       onChange={this.handleMonthChange}
                       input={<OutlinedInput labelWidth={this.state.labelWidthMonth} name="month" id="month" />}
                     >
-                    {this.createSelectMenu()}
+                    {this.createSelectMenuMonths()}
                     </Select>
                   </FormControl>
                 </form>

@@ -27,6 +27,9 @@ const styles = {
 function CategoriesTable(props) {
   const { classes, tableData } = props;
 
+  const tableEntries = tableData ? tableData.entries : [];
+  const totalAmount = tableData ? tableData.amount : [];
+
   return (
     <div className={classes.tableContainer}>
       <Table>
@@ -39,7 +42,7 @@ function CategoriesTable(props) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {tableData.map(n => (
+          {tableEntries.map(n => (
             <TableRow key={n.name + n.amount}>
               <TableCell component="th" scope="row">
                 {n.date.format("DD.MM.YYYY")}
@@ -55,11 +58,11 @@ function CategoriesTable(props) {
           ))}
           <TableRow className={classes.averageRow} key="average">
               <TableCell component="th" scope="row">
-                Average
+                Total
               </TableCell>
               <TableCell/>
               <TableCell/>
-              <TableCell align="right">100</TableCell>
+              <TableCell align="right">-{totalAmount} €</TableCell>
           </TableRow>
         </TableBody>
       </Table>
