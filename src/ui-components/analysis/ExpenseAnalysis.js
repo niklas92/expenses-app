@@ -99,7 +99,8 @@ class ExpenseAnalysis extends React.Component {
 
   createSelectMenuCategories = () => {
     const menu = []
-    const categoryArray = this.props.classExp.get("3.2019") ? this.props.classExp.get("3.2019").expenseGroups : [];
+    const categoryArray = this.props.classExp.entries().next().value 
+      ? this.props.classExp.entries().next().value[1].expenseGroups : [];
 
     for (const i in categoryArray) {
       const cat = categoryArray[i].category
