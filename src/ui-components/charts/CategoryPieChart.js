@@ -6,7 +6,9 @@ import Cell from 'recharts/lib/component/Cell';
 
 const COLORS = ['#ffc107', '#009688', '#3f51b5', '#f44336', '#2196f3', '#cddc39', '#ff5722', '#00bcd4', '#673ab7', '#03a9f4'];
 
-function CategoriesPieChart(props) {
+function CategoryPieChart(props) {
+
+  console.log("chartData: ",props.chartData);
 
   const pieData = props.chartData 
     ? props.chartData.filter(e => e.amount > 0) 
@@ -27,4 +29,4 @@ function CategoriesPieChart(props) {
   );
 }
 
-export default CategoriesPieChart;
+export default CategoryPieChart;

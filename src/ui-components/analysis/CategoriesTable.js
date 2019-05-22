@@ -28,7 +28,7 @@ function CategoriesTable(props) {
   const { classes, tableData } = props;
 
   const tableEntries = tableData ? tableData.entries : [];
-  const totalAmount = tableData ? tableData.amount : [];
+  const totalAmount = tableData ? tableData.amount*(-1) : 0;
 
   return (
     <div className={classes.tableContainer}>
@@ -62,7 +62,7 @@ function CategoriesTable(props) {
               </TableCell>
               <TableCell/>
               <TableCell/>
-              <TableCell align="right">-{totalAmount} €</TableCell>
+              <TableCell align="right">{totalAmount} €</TableCell>
           </TableRow>
         </TableBody>
       </Table>

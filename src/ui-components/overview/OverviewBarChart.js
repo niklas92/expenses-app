@@ -10,9 +10,9 @@ import Tooltip from 'recharts/lib/component/Tooltip';
 import Legend from 'recharts/lib/component/Legend';
 
 function OverviewBarChart(props) {
-  const { tableData, monthlyAverage } = props;
+  const { chartData, monthlyAverage } = props;
 
-  const data = tableData.map(e => ({
+  const data = chartData.map(e => ({
     month: e.month,
     amount: e.amount,
   })).reverse();

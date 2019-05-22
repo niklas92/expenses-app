@@ -30,11 +30,35 @@ var getMonthlyExpenses = function (dataMap) {
 
 var calculateAverageExpense = function (dataMap) {
     var expenses = [];
-    // eslint-disable-next-line
-    for (const [key, val] of dataMap.entries()) {
+    
+    for (const [, val] of dataMap.entries()) {
         expenses.push(val.savings);
     }
     return (expenses.reduce((acc, e) => acc + Number(e), 0) / expenses.length).toFixed(2);
+}
+
+var calculateCategoryAverage = function (dataMap) {
+    const categoryMap = new Map();
+    const categoryArray = [];
+
+    for (const [, val] of dataMap.entries()) {
+        for (const e in val.expenseGroups) {
+            const exp = val.expenseGroups[e];
+            const oldVal = categoryMap.get(exp.category);
+            const newVal = oldVal ? oldVal + exp.amount : exp.amount;
+            categoryMap.set(exp.category, newVal);
+        }
+        
+    }
+
+    for (const [key, val] of categoryMap.entries()) {
+        categoryArray.push({
+            category: key, 
+            amount: Number((val / dataMap.size).toFixed(2))
+        });
+    }
+
+    return categoryArray;
 }
 
 var processData = function(data) {
@@ -46,7 +70,8 @@ var processData = function(data) {
         expenses,
         classExp,
         monExp: getMonthlyExpenses(classExp),
-        monAvg: calculateAverageExpense(classExp)
+        monAvg: calculateAverageExpense(classExp),
+        catAvg: calculateCategoryAverage(classExp)
     }
 }
 

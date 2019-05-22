@@ -8,7 +8,7 @@ import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem'
-import CategoriesPieChart from './CategoriesPieChart';
+import CategoryPieChart from '../charts/CategoryPieChart';
 import CategoriesBarChart from './CategoriesBarChart';
 import CategoriesTable from './CategoriesTable';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
@@ -78,7 +78,9 @@ class ExpenseAnalysis extends React.Component {
 
   chartData = () => {
     const month = this.props.classExp.get(this.state.selectedMonth);
-    return month ? month.expenseGroups : [];
+    return month ? month.expenseGroups.sort((a,b) => {
+      return a.amount > b.amount ? -1 : 1;
+    }) : [];
   }
 
   tableData = () => {
@@ -157,7 +159,7 @@ class ExpenseAnalysis extends React.Component {
               </div>      
 
               {this.state.isPieChart
-                ? <CategoriesPieChart chartData={this.chartData()}/>
+                ? <CategoryPieChart chartData={this.chartData()}/>
                 : <CategoriesBarChart chartData={this.chartData()}/>}
             </CardContent>
           </Card>

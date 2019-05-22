@@ -12,7 +12,7 @@ catergoryMap.set("CLOTHES", ["COS", "WEEKDAY", "H+M", "HM MUENCHEN", "ZALANDO SE
 catergoryMap.set("PUBLIC_TRANSPORT", ["MVG", "DB VERTRIEB GMBH", "STUTTGARTER STRASSENBAHNEN", "WIENER LINIEN", 
                                     "S-BAHN-BERLIN GMBH", "DB AUTOMATEN"])
 catergoryMap.set("TRAVEL", ["DB BAHN", "LUFTHANSA", "HOTEL", "AIRBNB", "SAS", "CONDOR", "TRAINLINE",
-                            "MEININGER", "EUROWINGS"])
+                            "MEININGER", "EUROWINGS", "URLAUB", "BAYERN TICKET"])
 catergoryMap.set("BOOKS", ["HUGENDUBEL", "ISARFLIMMERN", "BUCHHANDLUNG"])
 catergoryMap.set("INSURANCE", ["DOCURA", "AXA", "GOTHAER", "HUK-COBURG", "TECHNIKER KRANKENKASSE"])
 catergoryMap.set("ATM", ["BARGELDAUSZAHLUNG", "STADTSPARKASSE"])
