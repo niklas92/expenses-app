@@ -1,26 +1,26 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
+import React from "react";
+import PropTypes from "prop-types";
+import { withStyles } from "@material-ui/core/styles";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
 
 const styles = {
   root: {
-    width: '100%',
-    overflowX: 'auto',
+    width: "100%",
+    overflowX: "auto"
   },
   tableContainer: {
-    borderStyle: 'solid',
-    borderWidth: '1px',
-    borderRadius: '4px',
-    borderColor: 'rgba(0, 0, 0, 0.23)',
-    margin: '8px',
+    borderStyle: "solid",
+    borderWidth: "1px",
+    borderRadius: "4px",
+    borderColor: "rgba(0, 0, 0, 0.23)",
+    margin: "8px"
   },
   averageRow: {
-    backgroundColor: '#e0e0e0',
+    backgroundColor: "#e0e0e0"
   }
 };
 
@@ -28,7 +28,7 @@ function CategoriesTable(props) {
   const { classes, tableData } = props;
 
   const tableEntries = tableData ? tableData.entries : [];
-  const totalAmount = tableData ? tableData.amount*(-1) : 0;
+  const totalAmount = tableData ? tableData.amount * -1 : 0;
 
   return (
     <div className={classes.tableContainer}>
@@ -57,12 +57,12 @@ function CategoriesTable(props) {
             </TableRow>
           ))}
           <TableRow className={classes.averageRow} key="average">
-              <TableCell component="th" scope="row">
-                Total
-              </TableCell>
-              <TableCell/>
-              <TableCell/>
-              <TableCell align="right">{totalAmount} €</TableCell>
+            <TableCell component="th" scope="row">
+              Total
+            </TableCell>
+            <TableCell />
+            <TableCell />
+            <TableCell align="right">{totalAmount} €</TableCell>
           </TableRow>
         </TableBody>
       </Table>
