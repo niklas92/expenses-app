@@ -10,11 +10,11 @@
     "moment": "^2.24.0",
     "react": "^16.8.6",
     "react-bootstrap": "^1.0.0-beta.8",
-    "react-csv-reader": "^1.2.2",
+    "react-csv-reader": "^3.0.5",
     "react-dom": "^16.8.6",
     "react-dropzone": "^10.1.5",
     "react-router-dom": "^5.0.0",
-    "react-scripts": "3.0.0",
+    "react-scripts": "^3.4.1",
     "react-tap-event-plugin": "^3.0.3",
     "recharts": "^1.5.0"
   },

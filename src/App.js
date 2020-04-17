@@ -24,52 +24,52 @@ const drawerWidth = 240;
 const theme = createMuiTheme({
   palette: {
     secondary: {
-      main: "#82ca9d"
+      main: "#82ca9d",
     },
     primary: {
-      main: "#414a5c"
-    }
-  }
+      main: "#414a5c",
+    },
+  },
 });
 
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
-    display: "flex"
+    display: "flex",
   },
   toolbar: {
-    paddingRight: 24 // keep right padding when drawer closed
+    paddingRight: 24, // keep right padding when drawer closed
   },
   toolbarIcon: {
     display: "flex",
     alignItems: "center",
     justifyContent: "flex-end",
     padding: "0 8px",
-    ...theme.mixins.toolbar
+    ...theme.mixins.toolbar,
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(["width", "margin"], {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen
-    })
+      duration: theme.transitions.duration.leavingScreen,
+    }),
   },
   appBarShift: {
     marginLeft: drawerWidth,
     width: `calc(100% - ${drawerWidth}px)`,
     transition: theme.transitions.create(["width", "margin"], {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen
-    })
+      duration: theme.transitions.duration.enteringScreen,
+    }),
   },
   menuButton: {
     marginLeft: 12,
-    marginRight: 36
+    marginRight: 36,
   },
   menuButtonHidden: {
-    display: "none"
+    display: "none",
   },
   title: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   drawerPaper: {
     position: "relative",
@@ -77,19 +77,19 @@ const styles = theme => ({
     width: drawerWidth,
     transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen
-    })
+      duration: theme.transitions.duration.enteringScreen,
+    }),
   },
   drawerPaperClose: {
     overflowX: "hidden",
     transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen
+      duration: theme.transitions.duration.leavingScreen,
     }),
     width: theme.spacing.unit * 7,
     [theme.breakpoints.up("sm")]: {
-      width: theme.spacing.unit * 9
-    }
+      width: theme.spacing.unit * 9,
+    },
   },
   content: {
     flexGrow: 1,
@@ -99,11 +99,11 @@ const styles = theme => ({
     paddingRight: theme.spacing.unit * 6,
     height: `calc(100vh - 64px)`,
     marginTop: "64px",
-    overflow: "auto"
+    overflow: "auto",
   },
   h5: {
-    marginBottom: theme.spacing.unit * 2
-  }
+    marginBottom: theme.spacing.unit * 2,
+  },
 });
 
 class App extends React.Component {
@@ -113,7 +113,8 @@ class App extends React.Component {
     classifiedExpenses: new Map(),
     monthlyExpenses: [],
     categoryAverage: [],
-    monthlyAverage: 0
+    monthlyAverage: 0,
+    uploadCaption: "No file",
   };
 
   handleDrawerOpen = () => {
@@ -124,7 +125,7 @@ class App extends React.Component {
     this.setState({ open: false });
   };
 
-  handleFileLoaded = data => {
+  handleFileLoaded = (data, fileInfo) => {
     const { classExp, monExp, monAvg, catAvg } = processData(data);
     console.log(classExp);
 
@@ -133,7 +134,8 @@ class App extends React.Component {
       classifiedExpenses: classExp,
       monthlyExpenses: monExp,
       categoryAverage: catAvg,
-      monthlyAverage: monAvg
+      monthlyAverage: monAvg,
+      uploadCaption: "File successfully uploaded!  File name: " + fileInfo.name,
     });
   };
 
@@ -183,7 +185,7 @@ class App extends React.Component {
               paper: classNames(
                 classes.drawerPaper,
                 !this.state.open && classes.drawerPaperClose
-              )
+              ),
             }}
             open={this.state.open}
           >
@@ -201,7 +203,10 @@ class App extends React.Component {
                 exact
                 path="/"
                 component={() => (
-                  <FileImport onFileLoaded={this.handleFileLoaded} />
+                  <FileImport
+                    uploadCaption={this.state.uploadCaption}
+                    onFileLoaded={this.handleFileLoaded}
+                  />
                 )}
               ></Route>
               <Route
@@ -229,7 +234,7 @@ class App extends React.Component {
 }
 
 App.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(App);
