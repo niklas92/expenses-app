@@ -10,7 +10,8 @@ catergoryMap.set("GROCERIES", [
   "VOLLCORNER",
   "BASIC AG MUENCHEN",
   "DENNS BIOMARKT",
-  "ALDI"
+  "ALDI",
+  "LIDL"
 ]);
 catergoryMap.set("DRUGSTORE", ["DM DROGERIEMARKT", "ROSSMANN"]);
 catergoryMap.set("APPARTMENT", [
@@ -26,6 +27,7 @@ catergoryMap.set("CLOTHES", [
   "WEEKDAY",
   "H+M",
   "HM MUENCHEN",
+  "HMHENNESMAU",
   "ZALANDO SE",
   "ARKET",
   "PLANET SPORTS GMBH",
@@ -36,7 +38,11 @@ catergoryMap.set("CLOTHES", [
   "GLOBETROTTER",
   "KAUFGLUECK",
   "ASOSCOMLTD",
-  "BELLROY"
+  "BELLROY",
+  "ASKET",
+  "TOPSHOP",
+  "SPEEDO",
+  "ODERSO"
 ]);
 catergoryMap.set("PUBLIC_TRANSPORT", [
   "MVG",
@@ -71,9 +77,11 @@ catergoryMap.set("ATM", ["BARGELDAUSZAHLUNG", "STADTSPARKASSE"]);
 catergoryMap.set("BAR_CAFE", [
   "CAFE",
   "COFFEE",
+  "KAFFEE",
   "RESTAURANT",
   "TRATTORIA",
   "BURGER",
+  "BURRITO",
   "AROMA KAFFEEBAR",
   "GOLDMARIE",
   "HANS IM GLUECK",

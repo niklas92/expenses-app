@@ -6,24 +6,24 @@ import Typography from "@material-ui/core/Typography";
 import OverviewBarChart from "./OverviewBarChart";
 import CategoryPieChart from "../charts/CategoryPieChart";
 
-const styles = theme => ({
+const styles = (theme) => ({
   barChartContainer: {
     paddingTop: "16px",
-    marginLeft: "-22px"
+    marginLeft: "-22px",
   },
   cardContent: {
     display: "flex",
-    flexDirection: "column"
+    flexDirection: "column",
   },
   tableContainer: {
-    height: 320
+    height: 320,
   },
   cardContainer: {
-    marginBottom: "18px;"
+    marginBottom: "18px;",
   },
   cardDivider: {
-    minHeight: "30px"
-  }
+    minHeight: "30px",
+  },
 });
 
 class Overview extends React.Component {

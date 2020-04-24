@@ -14,7 +14,7 @@ const COLORS = [
   "#ff5722",
   "#00bcd4",
   "#673ab7",
-  "#03a9f4"
+  "#03a9f4",
 ];
 
 function CategoryPieChart(props) {
@@ -26,7 +26,7 @@ function CategoryPieChart(props) {
   console.log("totalAmount: ", totalAmount);
 
   const pieData = props.chartData
-    ? props.chartData.filter(e => e.amount > 0)
+    ? props.chartData.filter((e) => e.amount > 0)
     : [];
 
   const renderCustomizedLabel = ({ index }) => pieData[index].category;

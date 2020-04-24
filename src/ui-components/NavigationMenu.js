@@ -12,8 +12,8 @@ import { Link } from "react-router-dom";
 
 const styles = {
   menuItem: {
-    textDecoration: "none"
-  }
+    textDecoration: "none",
+  },
 };
 
 function NavigationMenu(props) {
@@ -50,7 +50,7 @@ function NavigationMenu(props) {
 }
 
 NavigationMenu.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(NavigationMenu);

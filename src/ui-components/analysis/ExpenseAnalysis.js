@@ -13,26 +13,26 @@ import CategoriesBarChart from "./CategoriesBarChart";
 import CategoriesTable from "./CategoriesTable";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
 
-const styles = theme => ({
+const styles = (theme) => ({
   cardContainer: {
-    marginBottom: "18px;"
+    marginBottom: "18px;",
   },
   cardContent: {
     display: "flex",
-    flexDirection: "column"
+    flexDirection: "column",
   },
   cardHeader: {
     display: "flex",
     flexDirection: "row",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
   },
   cardDivider: {
-    minHeight: "30px"
+    minHeight: "30px",
   },
   formControl: {
     margin: theme.spacing.unit,
-    minWidth: 120
-  }
+    minWidth: 120,
+  },
 });
 
 class ExpenseAnalysis extends React.Component {
@@ -49,7 +49,7 @@ class ExpenseAnalysis extends React.Component {
       isPieChart: true,
       labelWidthType: 0,
       labelWidthMonth: 0,
-      labelWidthCategory: 0
+      labelWidthCategory: 0,
     };
   }
 
@@ -59,19 +59,19 @@ class ExpenseAnalysis extends React.Component {
       labelWidthMonth: ReactDOM.findDOMNode(this.InputLabelRefMonth)
         .offsetWidth,
       labelWidthCategory: ReactDOM.findDOMNode(this.InputLabelRefCategory)
-        .offsetWidth
+        .offsetWidth,
     });
   }
 
-  handleMonthChange = event => {
+  handleMonthChange = (event) => {
     this.setState({ selectedMonth: event.target.value });
   };
 
-  handleChartTypeChange = event => {
+  handleChartTypeChange = (event) => {
     this.setState({ isPieChart: event.target.value });
   };
 
-  handleCategoryChange = event => {
+  handleCategoryChange = (event) => {
     this.setState({ selectedCategory: event.target.value });
   };
 
@@ -87,7 +87,7 @@ class ExpenseAnalysis extends React.Component {
   tableData = () => {
     const month = this.props.classExp.get(this.state.selectedMonth);
     return month
-      ? month.expenseGroups.find(element => {
+      ? month.expenseGroups.find((element) => {
           return element.category === this.state.selectedCategory;
         })
       : undefined;
@@ -146,7 +146,7 @@ class ExpenseAnalysis extends React.Component {
               <form className={classes.root} autoComplete="off">
                 <FormControl variant="outlined" className={classes.formControl}>
                   <InputLabel
-                    ref={ref => {
+                    ref={(ref) => {
                       this.InputLabelRefType = ref;
                     }}
                     htmlFor="type"
@@ -174,7 +174,7 @@ class ExpenseAnalysis extends React.Component {
                 </FormControl>
                 <FormControl variant="outlined" className={classes.formControl}>
                   <InputLabel
-                    ref={ref => {
+                    ref={(ref) => {
                       this.InputLabelRefMonth = ref;
                     }}
                     htmlFor="month"
@@ -217,7 +217,7 @@ class ExpenseAnalysis extends React.Component {
               <form className={classes.root} autoComplete="off">
                 <FormControl variant="outlined" className={classes.formControl}>
                   <InputLabel
-                    ref={ref => {
+                    ref={(ref) => {
                       this.InputLabelRefCategory = ref;
                     }}
                     htmlFor="category"
@@ -240,7 +240,7 @@ class ExpenseAnalysis extends React.Component {
                 </FormControl>
                 <FormControl variant="outlined" className={classes.formControl}>
                   <InputLabel
-                    ref={ref => {
+                    ref={(ref) => {
                       this.InputLabelRefMonth = ref;
                     }}
                     htmlFor="month"

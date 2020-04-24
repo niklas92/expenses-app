@@ -10,18 +10,18 @@ import TableRow from "@material-ui/core/TableRow";
 const styles = {
   root: {
     width: "100%",
-    overflowX: "auto"
+    overflowX: "auto",
   },
   tableContainer: {
     borderStyle: "solid",
     borderWidth: "1px",
     borderRadius: "4px",
     borderColor: "rgba(0, 0, 0, 0.23)",
-    margin: "8px"
+    margin: "8px",
   },
   averageRow: {
-    backgroundColor: "#e0e0e0"
-  }
+    backgroundColor: "#e0e0e0",
+  },
 };
 
 function CategoriesTable(props) {
@@ -71,7 +71,7 @@ function CategoriesTable(props) {
 }
 
 CategoriesTable.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(CategoriesTable);

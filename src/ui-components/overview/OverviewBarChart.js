@@ -13,9 +13,9 @@ function OverviewBarChart(props) {
   const { chartData, monthlyAverage } = props;
 
   const data = chartData
-    .map(e => ({
+    .map((e) => ({
       month: e.month,
-      amount: e.amount
+      amount: e.amount,
     }))
     .reverse();
 
