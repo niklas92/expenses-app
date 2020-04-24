@@ -135,7 +135,7 @@ class App extends React.Component {
       monthlyExpenses: monExp,
       categoryAverage: catAvg,
       monthlyAverage: monAvg,
-      uploadCaption: "File successfully uploaded!  File name: " + fileInfo.name,
+      fileName: fileInfo.name,
     });
   };
 
@@ -204,7 +204,7 @@ class App extends React.Component {
                 path="/"
                 component={() => (
                   <FileImport
-                    uploadCaption={this.state.uploadCaption}
+                    fileName={this.state.fileName}
                     onFileLoaded={this.handleFileLoaded}
                   />
                 )}
