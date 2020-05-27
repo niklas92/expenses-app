@@ -6,6 +6,7 @@
     "@material-ui/core": "^4.9.10",
     "@material-ui/icons": "^3.0.2",
     "bootstrap": "^4.3.1",
+    "env-cmd": "^10.1.0",
     "fast-csv": "^2.5.0",
     "moment": "^2.24.0",
     "react": "^16.8.6",
@@ -21,9 +22,11 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "build:production": "env-cmd -f .env.production npm run build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "homepage": "https://expenses-checker.web.app",
   "eslintConfig": {
     "extends": "react-app"
   },
