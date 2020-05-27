@@ -18,6 +18,7 @@ import { Switch, Route } from "react-router-dom";
 import FileImport from "./ui-components/FileImport.js";
 import ExpenseAnalysis from "./ui-components/analysis/ExpenseAnalysis.js";
 import { processData } from "./actions/parseCSV";
+import { isBrowser } from "react-device-detect";
 
 const drawerWidth = 240;
 
@@ -108,7 +109,7 @@ const styles = (theme) => ({
 
 class App extends React.Component {
   state = {
-    open: true,
+    open: isBrowser,
     rawData: [],
     classifiedExpenses: new Map(),
     monthlyExpenses: [],
@@ -175,7 +176,7 @@ class App extends React.Component {
                 noWrap
                 className={classes.title}
               >
-                Expenses App
+                Expenses Checker
               </Typography>
             </Toolbar>
           </AppBar>
