@@ -19,10 +19,31 @@ const styles = (theme) => ({
     height: 320,
   },
   cardContainer: {
-    marginBottom: "18px;",
+    marginBottom: "18px",
+  },
+  cardContainerSideBar: {
+    marginBottom: "18px",
+    display: "flex",
+    justifyContent: "stretch",
   },
   cardDivider: {
     minHeight: "30px",
+  },
+  cardContentPrimary: { flexGrow: 1 },
+  cardContentSecondary: {
+    backgroundColor: "rgba(0, 0, 0, 0.1)",
+  },
+  kpiContainer: {
+    margin: "48px 15px",
+  },
+  kpiAmount: {
+    color: theme.palette.secondary.main,
+    fontSize: "30px",
+    fontWeight: "bold",
+  },
+  kpiLegend: {
+    color: "rgba(0, 0, 0, 0.45)",
+    fontSize: "12px",
   },
 });
 
@@ -45,16 +66,34 @@ class Overview extends React.Component {
           Overview
         </Typography>
 
-        <Card className={classes.cardContainer}>
-          <CardContent>
+        <Card className={classes.cardContainerSideBar}>
+          <CardContent className={classes.cardContentPrimary}>
             <Typography color="textSecondary" component="h5" variant="h5">
               Monthly Savings
             </Typography>
             <div className={classes.barChartContainer}>
               <OverviewBarChart
                 chartData={this.props.monthlyExpenses}
-                monthlyAverage={this.props.monthlyAverage}
+                monAvgSavings={this.props.monAvgSavings}
               />
+            </div>
+          </CardContent>
+          <CardContent className={classes.cardContentSecondary}>
+            <div className={classes.kpiContainer}>
+              <div className={classes.kpiAmount}>
+                {this.props.monAvgExpenses} €
+              </div>
+              <div className={classes.kpiLegend}>AVERAGE EXPENSES</div>
+            </div>
+            <div className={classes.kpiContainer}>
+              <div className={classes.kpiAmount}>
+                {this.props.monAvgSavings} €
+              </div>
+              {this.props.monAvgSavings >= 0 ? (
+                <div className={classes.kpiLegend}>AVERAGE SAVINGS</div>
+              ) : (
+                <div className={classes.kpiLegend}>AVERAGE OVERDRAFT</div>
+              )}
             </div>
           </CardContent>
         </Card>

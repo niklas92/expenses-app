@@ -13,6 +13,7 @@ import { Link } from "react-router-dom";
 const styles = {
   menuItem: {
     textDecoration: "none",
+    color: "rgba(0, 0, 0, 0.54)",
   },
 };
 

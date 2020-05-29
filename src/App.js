@@ -114,7 +114,8 @@ class App extends React.Component {
     classifiedExpenses: new Map(),
     monthlyExpenses: [],
     categoryAverage: [],
-    monthlyAverage: 0,
+    monAvgSavings: 0,
+    monAvgExpenses: 0,
     uploadCaption: "No file",
   };
 
@@ -127,15 +128,17 @@ class App extends React.Component {
   };
 
   handleFileLoaded = (data, fileInfo) => {
-    const { classExp, monExp, monAvg, catAvg } = processData(data);
-    console.log(classExp);
+    const { classExp, monExp, monAvgSav, monAvgExp, catAvg } = processData(
+      data
+    );
 
     this.setState({
       rawData: data,
       classifiedExpenses: classExp,
       monthlyExpenses: monExp,
       categoryAverage: catAvg,
-      monthlyAverage: monAvg,
+      monAvgSavings: monAvgSav,
+      monAvgExpenses: monAvgExp,
       fileName: fileInfo.name,
     });
   };
@@ -215,7 +218,8 @@ class App extends React.Component {
                 component={() => (
                   <Overview
                     monthlyExpenses={this.state.monthlyExpenses}
-                    monthlyAverage={this.state.monthlyAverage}
+                    monAvgSavings={this.state.monAvgSavings}
+                    monAvgExpenses={this.state.monAvgExpenses}
                     categoryAverage={this.state.categoryAverage}
                   />
                 )}

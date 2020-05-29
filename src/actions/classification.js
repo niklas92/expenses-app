@@ -13,6 +13,7 @@ var classifyExpenses = function (expenses) {
 var monthlyClassification = function (exp) {
   var income = 0;
   var savings = 0;
+  var totalExp = 0;
   var expMap = new Map();
 
   exp.forEach((e) => {
@@ -21,6 +22,7 @@ var monthlyClassification = function (exp) {
     if (key === "INCOME") {
       income += e.amount;
     } else {
+      totalExp += e.amount;
       var oldVal = expMap.get(key);
 
       if (!oldVal) {
@@ -48,6 +50,7 @@ var monthlyClassification = function (exp) {
     expenseGroups: expArr,
     income: income.toFixed(2),
     savings: savings.toFixed(2),
+    totalExp: totalExp.toFixed(2),
   };
 };
 

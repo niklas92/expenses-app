@@ -22,9 +22,6 @@ function CategoryPieChart(props) {
     ? props.chartData.reduce((acc, e) => acc + Number(e.amount), 0)
     : 0;
 
-  console.log("chartData: ", props.chartData);
-  console.log("totalAmount: ", totalAmount);
-
   const pieData = props.chartData
     ? props.chartData.filter((e) => e.amount > 0)
     : [];

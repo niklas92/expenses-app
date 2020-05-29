@@ -28,11 +28,24 @@ var getMonthlyExpenses = function (dataMap) {
   return expenses;
 };
 
-var calculateAverageExpense = function (dataMap) {
+// Monthly average of savings or overdraft (income included)
+var calculateAverageSavings = function (dataMap) {
   var expenses = [];
 
   for (const [, val] of dataMap.entries()) {
     expenses.push(val.savings);
+  }
+  return (
+    expenses.reduce((acc, e) => acc + Number(e), 0) / expenses.length
+  ).toFixed(2);
+};
+
+// Monthly average of expenses (income not included)
+var calculateAverageExpense = function (dataMap) {
+  var expenses = [];
+
+  for (const [, val] of dataMap.entries()) {
+    expenses.push(val.totalExp);
   }
   return (
     expenses.reduce((acc, e) => acc + Number(e), 0) / expenses.length
@@ -71,9 +84,15 @@ var processData = function (data) {
     expenses,
     classExp,
     monExp: getMonthlyExpenses(classExp),
-    monAvg: calculateAverageExpense(classExp),
+    monAvgSav: calculateAverageSavings(classExp),
+    monAvgExp: calculateAverageExpense(classExp),
     catAvg: calculateCategoryAverage(classExp),
   };
 };
 
-export { processData, calculateAverageExpense, getMonthlyExpenses };
+export {
+  processData,
+  calculateAverageSavings,
+  calculateAverageExpense,
+  getMonthlyExpenses,
+};
