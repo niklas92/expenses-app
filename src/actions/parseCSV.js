@@ -1,23 +1,46 @@
 import moment from "moment";
 import classifyExpenses from "./classification";
+import bankMap from "./bankFormat";
 
-var prepareData = function (expenses) {
-  return expenses
-    .map((e) => ({
-      date: moment(e[0], "DD.MM.YYYY"),
-      name: e[2],
-      reference: e[4],
-      amount: Number(e[7].replace(".", "").replace(",", ".")),
-    }))
-    .reduce((acc, exp) => {
-      let arr = acc.get(exp.date.month() + 1 + "." + exp.date.year());
-      if (!arr) {
-        acc.set(exp.date.month() + 1 + "." + exp.date.year(), [exp]);
-      } else {
-        arr.push(exp);
-      }
-      return acc;
-    }, new Map());
+var prepareData = function (expenses, format) {
+  return (
+    expenses
+      // format into object & filter out irrelevant entries
+      .map((e) => {
+        //filter out header fields
+        if (
+          e.length >=
+          Math.max(format.date, format.name, format.reference, format.amount) +
+            1
+        ) {
+          let amountStr = e[format.amount].replace(".", "").replace(",", ".");
+
+          //filter out irrelevent entries with no value in amount
+          return !isNaN(amountStr)
+            ? {
+                date: moment(e[format.date], "DD.MM.YYYY"),
+                name: e[format.name],
+                reference: e[format.reference],
+                amount: Number(amountStr),
+              }
+            : null;
+        } else {
+          return null;
+        }
+      })
+      // filter null entries
+      .filter((e) => !!e)
+      // map all months together
+      .reduce((acc, exp) => {
+        let arr = acc.get(exp.date.month() + 1 + "." + exp.date.year());
+        if (!arr) {
+          acc.set(exp.date.month() + 1 + "." + exp.date.year(), [exp]);
+        } else {
+          arr.push(exp);
+        }
+        return acc;
+      }, new Map())
+  );
 };
 
 var getMonthlyExpenses = function (dataMap) {
@@ -75,8 +98,8 @@ var calculateCategoryAverage = function (dataMap) {
   return categoryArray;
 };
 
-var processData = function (data) {
-  const expenses = prepareData(data);
+var processData = function (data, bank) {
+  const expenses = prepareData(data, bankMap.get(bank));
 
   const classExp = classifyExpenses(expenses);
 

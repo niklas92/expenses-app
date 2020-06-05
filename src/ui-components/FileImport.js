@@ -1,4 +1,5 @@
 import React from "react";
+import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
@@ -9,6 +10,12 @@ import Button from "@material-ui/core/Button";
 import CancelIcon from "@material-ui/icons/Cancel";
 import CheckCircle from "@material-ui/icons/CheckCircle";
 import InsertDriveFile from "@material-ui/icons/InsertDriveFile";
+import FormControl from "@material-ui/core/FormControl";
+import InputLabel from "@material-ui/core/InputLabel";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
+import OutlinedInput from "@material-ui/core/OutlinedInput";
+import bankMap from "../actions/bankFormat";
 
 const styles = (theme) => ({
   csvReader: {
@@ -37,13 +44,43 @@ const styles = (theme) => ({
     padding: "8px 0",
   },
   uploadStatusText: { alignSelf: "center", paddingLeft: "7px" },
+  cardHeader: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  formControl: {
+    margin: theme.spacing.unit,
+    minWidth: 120,
+  },
 });
 
 class FileImport extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      labelWidthBank: 0,
+    };
   }
+
+  componentDidMount() {
+    this.setState({
+      labelWidthBank: ReactDOM.findDOMNode(this.InputLabelRefBank).offsetWidth,
+    });
+  }
+
+  createSelectMenuBank = () => {
+    const menu = [];
+
+    for (const [k] of bankMap.entries()) {
+      menu.push(
+        <MenuItem key={k} value={k}>
+          {k}
+        </MenuItem>
+      );
+    }
+    return menu;
+  };
 
   render() {
     const { classes, fileName } = this.props;
@@ -72,9 +109,36 @@ class FileImport extends React.Component {
 
         <Card className={classes.cardContainer}>
           <CardContent>
-            <Typography color="textSecondary" component="h5" variant="h5">
-              Please upload your Bank statement in CSV format
-            </Typography>
+            <div className={classes.cardHeader}>
+              <Typography color="textSecondary" component="h5" variant="h5">
+                Please upload your Bank statement in CSV format
+              </Typography>
+              <form className={classes.root} autoComplete="off">
+                <FormControl variant="outlined" className={classes.formControl}>
+                  <InputLabel
+                    ref={(ref) => {
+                      this.InputLabelRefBank = ref;
+                    }}
+                    htmlFor="bank"
+                  >
+                    Bank
+                  </InputLabel>
+                  <Select
+                    value={this.props.selectedBank}
+                    onChange={this.props.onBankChange}
+                    input={
+                      <OutlinedInput
+                        labelWidth={this.state.labelWidthBank}
+                        name="bank"
+                        id="bank"
+                      />
+                    }
+                  >
+                    {this.createSelectMenuBank()}
+                  </Select>
+                </FormControl>
+              </form>
+            </div>
 
             <div className={classes.cardBody}>
               {fileName ? (

@@ -11,7 +11,7 @@ catergoryMap.set("GROCERIES", [
   "BASIC AG MUENCHEN",
   "DENNS BIOMARKT",
   "ALDI",
-  "LIDL"
+  "LIDL",
 ]);
 catergoryMap.set("DRUGSTORE", ["DM DROGERIEMARKT", "ROSSMANN"]);
 catergoryMap.set("APPARTMENT", [
@@ -20,7 +20,7 @@ catergoryMap.set("APPARTMENT", [
   "SWM VERSORGUNGS GMBH",
   "M-NET TELEKOMMUNIKATIONS GMBH",
   "ARD ZDF DRADIO BEITRAGSSERVICE",
-  "NEBENKOSTEN"
+  "NEBENKOSTEN",
 ]);
 catergoryMap.set("CLOTHES", [
   "COS",
@@ -42,7 +42,7 @@ catergoryMap.set("CLOTHES", [
   "ASKET",
   "TOPSHOP",
   "SPEEDO",
-  "ODERSO"
+  "ODERSO",
 ]);
 catergoryMap.set("PUBLIC_TRANSPORT", [
   "MVG",
@@ -50,7 +50,7 @@ catergoryMap.set("PUBLIC_TRANSPORT", [
   "STUTTGARTER STRASSENBAHNEN",
   "WIENER LINIEN",
   "S-BAHN-BERLIN GMBH",
-  "DB AUTOMATEN"
+  "DB AUTOMATEN",
 ]);
 catergoryMap.set("TRAVEL", [
   "DB BAHN",
@@ -63,7 +63,7 @@ catergoryMap.set("TRAVEL", [
   "MEININGER",
   "EUROWINGS",
   "URLAUB",
-  "BAYERN TICKET"
+  "BAYERN TICKET",
 ]);
 catergoryMap.set("BOOKS", ["HUGENDUBEL", "ISARFLIMMERN", "BUCHHANDLUNG"]);
 catergoryMap.set("INSURANCE", [
@@ -71,7 +71,7 @@ catergoryMap.set("INSURANCE", [
   "AXA",
   "GOTHAER",
   "HUK-COBURG",
-  "TECHNIKER KRANKENKASSE"
+  "TECHNIKER KRANKENKASSE",
 ]);
 catergoryMap.set("ATM", ["BARGELDAUSZAHLUNG", "STADTSPARKASSE"]);
 catergoryMap.set("BAR_CAFE", [
@@ -92,7 +92,7 @@ catergoryMap.set("BAR_CAFE", [
   "NANA SPEISEBAR",
   "MIYO BOBLINGEN",
   "BRAUKUNST BERLIN",
-  "KAISERGARTEN"
+  "KAISERGARTEN",
 ]);
 catergoryMap.set("SAVINGS", ["RUECKLAGEN", "SPARPLAN"]);
 

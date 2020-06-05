@@ -117,6 +117,7 @@ class App extends React.Component {
     monAvgSavings: 0,
     monAvgExpenses: 0,
     uploadCaption: "No file",
+    selectedBank: "ING",
   };
 
   handleDrawerOpen = () => {
@@ -129,7 +130,8 @@ class App extends React.Component {
 
   handleFileLoaded = (data, fileInfo) => {
     const { classExp, monExp, monAvgSav, monAvgExp, catAvg } = processData(
-      data
+      data,
+      this.state.selectedBank
     );
 
     this.setState({
@@ -141,6 +143,10 @@ class App extends React.Component {
       monAvgExpenses: monAvgExp,
       fileName: fileInfo.name,
     });
+  };
+
+  handleBankChange = (event) => {
+    this.setState({ selectedBank: event.target.value });
   };
 
   render() {
@@ -209,7 +215,9 @@ class App extends React.Component {
                 component={() => (
                   <FileImport
                     fileName={this.state.fileName}
+                    selectedBank={this.state.selectedBank}
                     onFileLoaded={this.handleFileLoaded}
+                    onBankChange={this.handleBankChange}
                   />
                 )}
               ></Route>
