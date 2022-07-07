@@ -8,7 +8,7 @@
     "bootstrap": "^4.3.1",
     "env-cmd": "^10.1.0",
     "fast-csv": "^2.5.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "react": "^16.8.6",
     "react-bootstrap": "^1.0.0-beta.8",
     "react-csv-reader": "^3.0.5",
